@@ -1,24 +1,28 @@
-# README
+# Cart App
+=================
+Ruby version: MRI 2.4.1
+Rails version: 5.1.2
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+- Clone this repository
+- Bundle install
+- Run rails db:create db:migrate db:seed 
+- Visit localhost:3000 to try demo app
 
-Things you may want to cover:
+##To create promotions
+- Visit /promotions
+- Create promotion
+- Add product to promotions (bundle products)
+- Add free bundles to promotion by checking 'Free' radio button
 
-* Ruby version
+##To redeem code 
+- visit /store
+- Try adding products to cart
+- Try 'I<3AMAYSIM' code for a percent based discount
+- Try 'I<3AMAYSIM_2' code for an amount based discount
 
-* System dependencies
+##To run tests 
+- Run rspec
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+###Deviations from Test requirements 
+- Creating bundled products for promotions for one-click "Purchase of products" instead of single item purchase and matching it to applicable promotions
+- Added amount based code discount
