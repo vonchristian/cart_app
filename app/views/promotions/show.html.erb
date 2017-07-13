@@ -1,0 +1,11 @@
+<%=@promotion.name %>
+<%= link_to "Add Product", new_promotion_product_promotion_path(@promotion) %>
+<% @promotion.product_promotions.each do |product_promotion| %>
+
+	    <%= product_promotion.product_quantity %>
+	    <%= product_promotion.product_name %>
+	    <%= product_promotion.promo_price %>
+	    <% if product_promotion.free? %>
+	      <span class="label label-success"> Free </span>
+	    <% end %>
+	  <% end %>

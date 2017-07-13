@@ -1,0 +1,9 @@
+<%= link_to 'New Promotion', new_promotion_path, class: "btn btn-primary" %>
+<% @promotions.each do |promotion| %>
+	<%= link_to promotion.name, promotion %>
+	  <% promotion.product_promotions.each do |product_promotion| %>
+	    <%= product_promotion.product_quantity %>
+	    <%= product_promotion.product_name %>
+	    <%= product_promotion.promo_price %>
+	  <% end %>
+<% end %>
