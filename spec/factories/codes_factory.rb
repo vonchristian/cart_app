@@ -3,12 +3,12 @@ FactoryGirl.define do
 		code { Faker::Commerce.promotion_code }
 		
 		factory :percent_based_code do 
-			promo_type 'percent'
+			promo_code_type 'percent'
 			percent 1
 		end 
 
 		factory :amount_based_code do 
-			promo_type 'amount'
+			promo_code_type 'amount'
 			amount 10
 		end 
 	end 

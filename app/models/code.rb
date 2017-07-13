@@ -1,5 +1,5 @@
 class Code < ApplicationRecord
-	enum promo_type: [:percent, :amount]
+	enum promo_code_type: [:percent, :amount]
 	
 	has_many :promotion_codes
 

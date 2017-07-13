@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170713080137) do
+ActiveRecord::Schema.define(version: 20170713115538) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 20170713080137) do
     t.decimal "percent"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "promo_type"
+    t.integer "promo_code_type"
     t.decimal "amount"
     t.index ["code"], name: "index_codes_on_code", unique: true
   end

@@ -8,6 +8,6 @@ describe Code do
 		it { is_expected.to validate_presence_of :code }
 		it { is_expected.to validate_uniqueness_of :code }
 	end
-	it { is_expected.to define_enum_for(:promo_type).with([:percent, :amount]) }
+	it { is_expected.to define_enum_for(:promo_code_type).with([:percent, :amount]) }
 end 
 
