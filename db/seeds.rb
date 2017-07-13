@@ -1,7 +1,7 @@
-product_1 = Product.create(code: 'ult_small', name: 'Unlimited 1GB', price: 24.90)
-product_2 = Product.create(code: 'ult_medium', name: 'Unlimited 2GB', price: 29.90)
-product_3 = Product.create(code: 'ult_large', name: 'Unlimited 5GB', price: 44.90)
-product_4 = Product.create(code: '1gb', name: '1GB Data pack', price: 9.90)
+product_1 = Product.create(code: 'ult_small', name: 'Unlimited 1GB', price: 24.90, data_size: 1000)
+product_2 = Product.create(code: 'ult_medium', name: 'Unlimited 2GB', price: 29.90, data_size: 2000)
+product_3 = Product.create(code: 'ult_large', name: 'Unlimited 5GB', price: 44.90, data_size: 5000)
+product_4 = Product.create(code: '1gb', name: '1GB Data pack', price: 9.90, data_size: 1000)
 
 #promotions 
 promotion_1 = Promotion.create(name: 'Unlimited 1GB Sim')
@@ -16,4 +16,4 @@ ProductPromotion.create(promotion: promotion_2, product: product_4, product_quan
 
 #Code 
 Code.create(promo_type: 'percent', percent: 0.1, code: 'I<3AMAYSIM')
-Code.create(promo_type: 'amount', percent: 20, code: 'I<3AMAYSIM_2')
+Code.create(promo_type: 'amount', amount: 20, code: 'I<3AMAYSIM_2')
