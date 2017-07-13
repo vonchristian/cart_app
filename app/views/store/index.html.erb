@@ -31,7 +31,7 @@
  <h1> Promotions </h1>
 
 		<% @promotions.each do |promotion| %>
-		<%= promotion.name.upcase %>
+		<b><%= promotion.name.upcase %></b>
 		  <%= f.input :itemable_id, input_html: { value: promotion.id }, as: :hidden %>
 		  <%= f.input :itemable_type, input_html: { value: promotion.class }, as: :hidden %>
 		  <%= f.input :unit_cost, input_html: { id: 'line_item_unit_cost', value: promotion.total_price }, as: :hidden %>
