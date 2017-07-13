@@ -1,0 +1,5 @@
+<%= link_to 'New Code', new_code_path, class: "btn btn-primary" %>
+
+<% @codes.each do |code| %>
+	<%= code.code %>
+<% end %>

@@ -1,6 +1,6 @@
 <%= simple_form_for [@promotion, @product_promotion] do |f| %>
   <%= f.error_notification %>
-  <%= f.input :product_id, collection: Product.all.map{|a| [a.name, a.id] } %>
+  <%= f.input :product_id, collection: Product.all.map{|a| [a.name, a.id] }, as: :radio_buttons %>
   <%= f.input :product_quantity %>
   <%= f.input :promo_price %>
   <%= f.input :free %>

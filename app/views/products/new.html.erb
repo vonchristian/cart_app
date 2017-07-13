@@ -1,11 +1,8 @@
-<%=form_for @product do |f| %>
-  <%= f.label :code, "Product Code" %>
-  <%= f.text_field :code %>
-  <%= f.label :name %>
-  <%= f.text_field :name %>
-  <%= f.label :data_size %>
-  <%= f.text_field :data_size %>
-  <%= f.label :price %>
-  <%= f.text_field :price %>
+<%=simple_form_for @product do |f| %>
+  <%= f.input :code %>
+  <%= f.input :name %>
+  <%= f.input :data_size %>
+  <%= f.input :price %>
+
   <%= f.submit "Create Product" %>
 <% end %>

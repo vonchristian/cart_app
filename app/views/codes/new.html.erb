@@ -1,0 +1,8 @@
+<%= simple_form_for @code do |f| %>
+  <%= f.error_notification %>
+  <%= f.input :code %>
+  <%= f.input :promo_code_type, collection: Code.promo_code_types.keys.to_a.map{ |a| [a.titleize, a] }, as: :radio_buttons %>
+  <%= f.input :percent, label: "Percent(in decimal)" %>
+  <%= f.input :amount %>
+  <%= f.submit "Create Code" %>
+<% end %>

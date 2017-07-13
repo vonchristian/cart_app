@@ -8,7 +8,7 @@ class PromotionCode < ApplicationRecord
   	if code.percent?
   		cart.total_cost * code.percent
   	elsif code.amount?
-  	 code.amount
+  	  code.amount
   	end
   end
 end

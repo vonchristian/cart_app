@@ -8,6 +8,6 @@ Rails.application.routes.draw do
 	resources :line_items, only: [:new, :create]
 	resources :orders, only: [:new, :create]
 	resources :promotion_codes, only: [:create]
-
+  resources :codes, only: [:index, :new, :create]
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
