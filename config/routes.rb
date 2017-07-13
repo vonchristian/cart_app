@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
 	root to: 'store#index'
 	resources :store, only: [:index]
-	resources :products, only: [:index, :new, :create]
+	resources :products, only: [:index, :new, :create] do 
+		resources :product_line_items, only: [:new, :create]
+	end
 	resources :promotions, only: [:index, :show, :new, :create] do 
 		resources :product_promotions, only: [:new, :create], module: :promotions
 	end

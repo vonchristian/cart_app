@@ -10,11 +10,19 @@ describe Promotion do
 		it { is_expected.to validate_uniqueness_of :name }
 	end
 
-	it '#total_price' do 
+	it '#discounted_price' do 
 		promotion = create(:promotion)
 		product_promotion = create(:product_promotion, promotion: promotion, promo_price: 10)
 		another_product_promotion = create(:product_promotion, promotion: promotion, promo_price: 10)
   
-    expect(promotion.total_price).to eql(20)
+    expect(promotion.discounted_price).to eql(20)
+  end
+  it '#regular_price' do 
+		promotion = create(:promotion)
+		product = create(:product, price: 10)
+		product_promotion = create(:product_promotion, promotion: promotion, product: product, product_quantity: 1)
+		another_product_promotion = create(:product_promotion, promotion: promotion, product: product, product_quantity: 1)
+  
+    expect(promotion.regular_price).to eql(20)
   end
 end

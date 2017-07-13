@@ -1,121 +1,132 @@
- <%= simple_form_for @line_item do |f| %>
- <div class="row">
+
+<div class="row">
   <div class="col-md-4">
     <div class="panel panel-default">
       <div class="panel-body">
- <h1> Products </h1>
- <% @products.each do |product| %>
- <b><%= product.name %><span class="pull-right"><%=number_to_currency product.price %></span></b>
- <br>
- <br>
-  <%= f.input :itemable_id, input_html: { value: product.id }, as: :hidden %>
-		  <%= f.input :itemable_type, input_html: { value: product.class }, as: :hidden %>
-		  <%= f.input :unit_cost, input_html: { id: 'line_item_unit_cost', value: product.price }, as: :hidden %>
-		<div class="row">
-		  <div class="col-md-4">
-		  <%= f.input :quantity, input_html: { oninput: 'calculateProductTotalCost()', id: 'product_quantity', value: 1}, label: false %>
-			  <%= f.input :total_cost, input_html: { id: 'product_total_cost', value: product.price } %>
-			</div>
-			<div class="col-md-4">
-			  <%= f.submit "Add to Cart" %>
-			</div>
-		</div>
- <br>
-<% end %>
-</div>
-</div>
-</div>
+        <h1> Products </h1>
+        <% @products.each do |product| %>
+	        <%= simple_form_for @line_item do |f| %>
+	          <b><%= product.name %><span class="pull-right"><%=number_to_currency product.price %></span></b>
+	          <br>
+	          <br>
+
+	          <%= f.input :itemable_id, input_html: { value: product.id }, as: :hidden %>
+		        <%= f.input :itemable_type, input_html: { value: product.class }, as: :hidden %>
+		        <%= f.input :unit_cost, input_html: { id: 'line_item_unit_cost', value: product.price }, as: :hidden %>
+		        <div class="row">
+		          <div class="col-md-4">
+		            <%= f.input :quantity, input_html: { oninput: 'calculateProductTotalCost()', id: 'product_quantity', value: 1}, label: false %>
+			          <%= f.input :total_cost, input_html: { id: 'product_total_cost', value: product.price }, as: :hidden %>
+			        </div>
+			        <div class="col-md-4">
+			          <%= f.submit "Add to Cart", class: "btn btn-primary" %>
+			        </div>
+		        </div>
+	          <br>
+	        <% end %>
+	      <% end %>
+      </div>
+    </div>
+  </div>
   <div class="col-md-4">
     <div class="panel panel-default">
       <div class="panel-body">
- <h1> Promotions </h1>
+        <h1> Promotions </h1>
+		    <% @promotions.each do |promotion| %>
+          <%= simple_form_for @line_item do |f| %>
+		        <b><%= promotion.name.upcase %></b><span class="pull-right badge">You Save: <%=number_to_currency promotion.savings %></span></b>
+					  <%= f.input :itemable_id, input_html: { value: promotion.id }, as: :hidden %>
+					  <%= f.input :itemable_type, input_html: { value: promotion.class }, as: :hidden %>
+					  <%= f.input :unit_cost, input_html: { id: 'line_item_unit_cost', value: promotion.discounted_price }, as: :hidden %>
+			      <% promotion.product_promotions.each do |product_promotion| %>
+				      <ul>			    
+				        <li>
+				          <%= product_promotion.product_quantity %>
+				          <%= product_promotion.product_name %>
+				          <span class="pull-right">
+				            <% if product_promotion.free? %>
+				              <span class="label label-success"> Free </span>
+	                  <% else %>   
+				              <%=number_to_currency product_promotion.promo_price %>
+				            <% end %>
+				          </span>
+				        </li>
+				      </ul>
+			      <% end %>
+			     <span class="pull-right"><strike>Regular Price <%= number_to_currency promotion.regular_price %></strike> </span>
+			      <br>
+			      <br>
+			      <span class="pull-right"><b>Promo Price <%=number_to_currency promotion.discounted_price %></b></span>
+			      <br>
 
-		<% @promotions.each do |promotion| %>
-		<b><%= promotion.name.upcase %></b>
-		  <%= f.input :itemable_id, input_html: { value: promotion.id }, as: :hidden %>
-		  <%= f.input :itemable_type, input_html: { value: promotion.class }, as: :hidden %>
-		  <%= f.input :unit_cost, input_html: { id: 'line_item_unit_cost', value: promotion.total_price }, as: :hidden %>
-
-
-			
-			  <% promotion.product_promotions.each do |product_promotion| %>
-			  <ul>			    
-			    <li><%= product_promotion.product_quantity %>
-			    <%= product_promotion.product_name %>
-
-			   <span class="pull-right">
-			   <% if product_promotion.free? %>
-			    <span class="label label-success"> Free </span>
-        <% else %>   
-			     <%=number_to_currency product_promotion.promo_price %>
-			    </span>
-			  <% end %>
-			     </li>
-			  </ul>
-			  <% end %>
-			  <span class="pull-right"><b>PROMO PRICE <%=number_to_currency promotion.total_price %></b></span>
-			  <hr>
-			  <div class="row">
-			    <div class="col-md-4">
-			    <%= f.input :quantity, input_html: { oninput: 'calculateLineItemTotalCost()', id: 'line_item_quantity', value: 1}, label: false %>
-			    <%= f.input :total_cost, input_html: { id: 'line_item_total_cost', value: promotion.total_price }, as: :hidden %>
-			    </div>
-			    <div class="col-md-4">
-			      <%= f.submit "Add to Cart" %>
-          </div>
-        </div>
-        <br>
-		<% end %>
-<% end %>
-
-
-</div>
-</div>
-</div>
-<div class="col-md-4">
+			      <hr>
+			      <div class="row">
+			        <div class="col-md-4">
+			          <%= f.input :quantity, input_html: { oninput: 'calculateLineItemTotalCost()', id: 'line_item_quantity', value: 1}, label: false, as: :hidden %>
+			          <%= f.input :total_cost, input_html: { id: 'line_item_total_cost', value: promotion.discounted_price }, as: :hidden %>
+			        </div>
+			        <div class="col-md-4">
+			        </div>
+			        <div class="col-md-4">
+			          <%= f.submit "Add to Cart", class: "btn btn-primary" %>
+              </div>
+            </div>
+            <br>
+            <hr>
+          <% end %>
+		    <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
     <div class="panel panel-default">
-      <div class="panel-body"
-<% if @cart.line_items.any? %>
-	<div class="col-md-4 col-md-offset-1">
-	<p>Cart </p>
-	<% @cart.line_items.each do |line_item| %>
-	  <ul>
-		 <li>
-		 <%= line_item.quantity %>
-		 <%= line_item.name %>
-		 <span class="pull-right"><%=number_to_currency line_item.total_cost %></span>
-		 </li>
-		 </ul>
-		 <hr>
-	<% end %>
-	<b> SUBTOTAL <span class="pull-right"><%= number_to_currency @cart.total_cost %></span></b>
-	<br>
-  <br>
-	<p> Promo Codes </p>
-	<% @cart.promotion_codes.each do |promotion_code| %>
-	  <ul>
-	  <li><%= promotion_code.code.code %>
-	  <span class="pull-right text-danger">
-	    <%= promotion_code.applicable_discount %>
-	  </span>
-	  </li>
-	  </ul>
-	<% end %>
-	<br>
-	<br>
-	<b> TOTAL <span class="pull-right"><%= number_to_currency @cart.total_cost_less_discount %></span></b>
-	<hr>
-	<%= simple_form_for [@cart, @promotion_code], url: :promotion_codes do |ff| %>
-	  <div class="row">
-	    <div class="col-md-8">
-		    <%= ff.input :code, label: false, placeholder: 'Enter Code' %>
-		    <%= ff.input :cart_id, input_html: { value: @cart.id }, as: :hidden %>
-		  </div>
-		  <div class="col-md-4">
-		    <%= ff.submit "Claim Code" %>
-		  </div>
-		</div>
-		<% end %>
-	<center> <%= link_to "Checkout", new_order_path, class: "btn btn-primary btn-block" %></center>
-	</div>
-<% end %>
+      <div class="panel-body">
+        <% if @cart.line_items.any? %>
+	       
+	          <h1>Cart </h1>
+	          <% @cart.line_items.each do |line_item| %>
+	            <ul>
+		            <li>
+		              <%= line_item.quantity %>
+		              <%= line_item.name %>
+		              <span class="pull-right"><%=number_to_currency line_item.total_cost %></span>
+		            </li>
+		          </ul>
+		          <hr>
+	          <% end %>
+	          <b> SUBTOTAL <span class="pull-right"><%= number_to_currency @cart.total_cost %></span></b>
+	          <br>
+            <br>
+	          <p> Promo Codes </p>
+	          <% @cart.promotion_codes.each do |promotion_code| %>
+	            <ul>
+	              <li>
+	                <span class="text-success"><%= promotion_code.code.code %></span>
+	                <span class="pull-right text-success">
+	                  <%=number_to_currency promotion_code.applicable_discount %>
+	                </span>
+	              </li>
+	            </ul>
+	          <% end %>
+	          <br>
+	          <br>
+        	  <b> TOTAL <span class="pull-right"><%= number_to_currency @cart.total_cost_less_discount %></span></b>
+	          <hr>
+	          <%= simple_form_for [@cart, @promotion_code], url: :promotion_codes do |ff| %>
+	            <div class="row">
+	              <div class="col-md-8">
+		              <%= ff.input :code, label: false, placeholder: 'Enter Code' %>
+		              <%= ff.input :cart_id, input_html: { value: @cart.id }, as: :hidden %>
+		            </div>
+		            <div class="col-md-4">
+		              <%= ff.submit "Claim Code" %>
+		            </div>
+		          </div>
+		        <% end %>
+	          <center> <%= link_to "Checkout", new_order_path, class: "btn btn-primary btn-block" %></center>
+	        </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
