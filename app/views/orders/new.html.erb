@@ -10,7 +10,7 @@
 				 </ul>
 				 <hr>
 			<% end %>
-			<b> TOTAL <span class="pull-right"><%= number_to_currency @cart.total_cost %></span></b>
+			<b> TOTAL <span class="pull-right"><%= number_to_currency @cart.total_cost_less_discount %></span></b>
 		<%= simple_form_for @order do |f| %>
 		
 		<% end %>
